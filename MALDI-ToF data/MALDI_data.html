@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<html lang="en"> <head> 
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+ <title>MALDI-ToF data</title> 
+ <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+ </head> 
+ 
+ <body> <p>MALDI-ToF spectrum of PLA initiated by <b>1-AgBArF</b></p> 
+ 
+ <div id="myDiv"></div>
+ 
+ <script>
+
+function makeplot() {
+ 	Plotly.d3.csv('https://data.hpc.imperial.ac.uk/resolve/?doi=8762&file=3&access=', function(data){ processData(data) } );
+
+};
+	
+function processData(allRows) {
+
+	console.log(allRows);
+	var x = [], y = [];
+
+	for (var i=0; i<allRows.length; i++) {
+		row = allRows[i];
+		x.push( row['x_data'] );
+		y.push( row['y_data'] );
+	}
+	console.log( 'X',x, 'Y',y);
+	makePlotly(x, y);
+}
+
+function makePlotly(x,y){
+	var plotDiv = document.getElementById("plot");
+	var traces = [{
+		x: x, 
+		y: y,
+		line: {
+		//color: 'rgb(128, 0, 128)'
+		width: 0.5},
+		hovertemplate: 'm/z: %{x:.4f} <extra></extra>',
+	}];
+
+
+layout =  {
+    hovermode:'closest',
+    xaxis: {
+      title: 'm/z'
+  	   },
+    
+    yaxis: {
+      title: 'intensity (a.u.)'},
+      
+    title: 'MALDI-ToF spectrum (interactive view)'
+      }
+      
+	Plotly.newPlot('myDiv',
+	{
+    data: traces,
+    layout: layout,
+    });
+};
+  
+  
+  makeplot();
+  
+   </script>
+ 
+
+ </body> 
+ 
+ </html>
