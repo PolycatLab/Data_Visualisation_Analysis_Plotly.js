@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<html lang="en"> <head> 
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+ <title>Visualisation of data from a csv file using plotly</title> 
+ <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+ </head> 
+ 
+ <body> <p>
+ <sup>1</sup>H NMR spectra for <b>1</b> and <b>1-AgBArF</b>
+
+ 
+ </p> 
+ <p>The spectrum to display can be selected from the drop-down menu on the left hand side</p>
+ 
+ <div id="myDiv"></div>
+ 
+ <script>
+
+function makeplot() {
+ 	Plotly.d3.csv('https://data.hpc.imperial.ac.uk/resolve/?doi=8764&file=1&access=', function(data){ processData(data) } );
+
+};
+	
+function processData(allRows) {
+
+	console.log(allRows);
+	var x1 = [], y1 = [], x2 = [], y2 = []
+	; 
+
+	for (var i=0; i<allRows.length; i++) {
+		row = allRows[i];
+		x1.push( row['x1_data'] );
+		y1.push( row['y1_data'] );
+		x2.push( row['x2_data'] );
+		y2.push( row['y2_data'] );
+		}
+	console.log('X1',x1, 'Y1',y1, 'X2',x2, 'Y2',y2);
+	makePlotly(x1,y1,x2,y2);
+}
+
+function makePlotly(x1,y1,x2,y2){
+	var plotDiv = document.getElementById("plot");
+	var trace1 = [{
+		x: x1, 
+		y: y1,
+		name: '(<i>R</i>,<i>R</i>)-H<sub>2</sub><sup>H</sup><b>L</b>',
+		line: {
+		//color: 'rgb(128, 0, 128)'
+		width: 1},
+		hovertemplate: '&#948;= %{x:.2f} ppm <extra></extra>', 
+	}];
+	
+	
+	var trace2 = [{
+		visible: false,
+		x: x2, 
+		y: y2,
+		name: '(<i>S</i>,<i>S</i>)-H<sub>2</sub><sup>H</sup><b>L</b>',
+		line: {
+		//color: 'rgb(128, 0, 128)'
+		width: 1},
+		hovertemplate: '&#948;= %{x:.2f} ppm <extra></extra>',
+	}];
+	
+	
+	
+	
+
+	var AllTraces = [ trace1[0], trace2[0] ];
+
+layout =  {
+    hovermode:'closest', //To put the cursor next to the data when hovering over
+    xaxis: {
+    	//fixedrange: true,
+		zeroline: false,
+    	autotick: false,
+    	ticks: 'outside',
+    	//tick0: 0,
+    	dtick: 1,
+      autorange: 'reversed', //to reverse x-axis, for NMR and IR data for example
+      title: '&#948; (ppm)' //x-axis title
+  	   },
+   
+  
+    yaxis: {
+    zeroline: false,
+      title: 'intensity (a.u.)'}, //y-axis title
+      
+    title: 'NMR spectrum (interactive view)', //spectrum title
+    //showlegend: true,
+	legend: {
+	x: 0,
+	y: 1.1,
+	orientation: "h"
+	},
+    
+    updatemenus: [{
+        buttons: [{
+            method: 'restyle',
+            args: ['visible', [true, false]],
+            label: '<b>1</b>'
+        }, {
+            method: 'restyle',
+            args: ['visible', [false, true]],
+            label: '<b>1-AgBArF</b>'
+        
+        
+        }]
+    }]
+      }
+
+	Plotly.newPlot('myDiv', AllTraces, layout, {scrollZoom: true}
+    );
+        
+};
+  
+  
+  makeplot();
+  
+   </script>
+ 
+
+ </body> 
+ 
+ </html>
