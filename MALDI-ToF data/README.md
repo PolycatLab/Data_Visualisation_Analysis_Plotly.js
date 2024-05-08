@@ -1,4 +1,4 @@
-## MALDI-ToF data visulisation using Potly.js on ICL data repository 
+## MALDI-ToF data visualisation using Potly.js on ICL data repository 
 
  example from doi: [10.14469/hpc/8764](doi.org/10.14469/hpc/8764) (screeshot below)
 
