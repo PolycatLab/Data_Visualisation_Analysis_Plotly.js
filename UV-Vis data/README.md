@@ -1,6 +1,6 @@
-example of UV-Vis data plotted from a csv file
+## UV-Vis data plotted from a csv file using plotly.js
 
-can be tested here: doi.org/10.14469/hpc/8729
+exasmple from doi: [10.14469/hpc/8729](doi.org/10.14469/hpc/8729)
 
 screenshot below showing live view on the data repository, with optionn to interact with te data (zoom, pointer, etc...), as well as to select the data
 
