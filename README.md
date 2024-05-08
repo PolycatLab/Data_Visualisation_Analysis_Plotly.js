@@ -10,7 +10,7 @@ screeshot below for UV-Vis, NMR and MALD-ToF data
 
 <img width="1328" alt="image" src="https://github.com/PolycatLab/Data_Visualisation_Analysis/assets/167204637/17bdd3cf-ec14-48a2-8040-bd9728abc19b">
 
-<img width="1326" alt="image" src="https://github.com/PolycatLab/Data_Visualisation_Analysis/assets/167204637/531c5b89-103f-44c8-83f8-4af8f03445fe">
+[<img width="1326" alt="image" src="https://github.com/PolycatLab/Data_Visualisation_Analysis/assets/167204637/531c5b89-103f-44c8-83f8-4af8f03445fe">](doi.org/10.14469/hpc/8762)
 
 
 
